@@ -15,10 +15,10 @@ import wind_icon from'../Assets/wind.png'
 
 function Weather({ onWeatherData }) {
   const inputRef=useRef();
-  console.log("API Key:", import.meta.env.VITE_APP_ID);
+  
 
-const[weatherData,setWeatherData]=useState(null);
-const [loading, setLoading] = useState(false);
+  const[weatherData,setWeatherData]=useState(null);
+  const [loading, setLoading] = useState(false);
 
 
 //icons
@@ -56,14 +56,7 @@ const search=async(city)=>{
       }
 
        localStorage.setItem("lastCity", city); // ✅ SAVE CITY
-        useEffect(() => {
-          const savedCity = localStorage.getItem("lastCity") || "london";
-          search(savedCity);
-
-          if (inputRef.current) {
-            inputRef.current.value = savedCity;
-          }
-        }, []);
+      
       console.log(data);
       onWeatherData(data);
       const icon=allIcons[data.weather[0].icon] || clear_icon;
@@ -76,14 +69,18 @@ const search=async(city)=>{
       })
     }catch(error){
       setWeatherData(false);
-      console.log("Error in fetching weather data");
+      console.log("Error in fetching weather data",error);
     }
     inputRef.current.value = ""; // clear input
   }
+  useEffect(() => {
+          const savedCity = localStorage.getItem("lastCity") || "london";
+          search(savedCity);
 
-  useEffect(()=>{
-    search("london");
-  },[])
+          if (inputRef.current) {
+            inputRef.current.value = savedCity;
+          }
+        }, []);
 
   return (
     <div className='weather'>
