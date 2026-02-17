@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box; 
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+.app{
+    min-height: 100vh;
+    display: grid;
+    background: rgba(92, 141, 171, 0.848);
+    transition: background-color 0.5s, color 0.5s;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
